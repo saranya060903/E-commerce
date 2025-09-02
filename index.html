@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>E-Shop | Home</title>
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="script.js"></script>
+</head>
+<body>
+ <header class="topbar">
+    <div class="brand">E-Shop</div>
+    <nav class="top-nav">
+      <a class="active" href="index.html">🏠 Home</a>
+      <a href="cart.html" id="cartBtn">🛒 Cart</a>
+
+      <!-- Dropdown Menu -->
+      <div class="dropdown">
+        <div class="dropdown-btn" onclick="toggleMenu()">☰ Menu</div>
+        <ul class="dropdown-content" id="menuList">
+          <li><a href="fashion.html">Fashion</a></li>
+          <li><a href="electronics.html">Electronics</a></li>
+          <li><a href="mobile.html">Mobile</a></li>
+          <li><a href="home.html">Home</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero banner -->
+  <section class="hero">
+    <div class="slides">
+      <img src="images/img1.jpeg" alt="Vivo V60 Sale" />
+      <img src="images/img2.jpg" alt="Vivo V60 Sale" />
+      <img src="images/img3.jpg" alt="Vivo V60 Sale" />
+      <img src="images/img4.jpg" alt="Vivo V60 Sale" />
+      <img src="images/img5.jpg" alt="Vivo V60 Sale"/>
+      <img src="images/img6.jpg" alt="Vivo V60 Sale"/>
+      <img src="images/img7.jpg" alt="Vivo V60 Sale"/>
+    </div>
+    <div class="hero__badge">Sale is Live</div>
+  </section>
+
+  <!-- Running offers row -->
+  <div class="ticker">
+    <div class="ticker__track" id="tickerTrack">
+      <span>Top Brand • Price Drop • Big Discount • Free Delivery • Exchange Offers • Bank 10% OFF</span>
+      <span>Top Brand • Price Drop • Big Discount • Free Delivery • Exchange Offers • Bank 10% OFF</span>
+      <span>Top Brand • Price Drop • Big Discount • Free Delivery • Exchange Offers • Bank 10% OFF</span>
+    </div>
+  </div>
+
+  <!-- Main categories -->
+  <section class="grid4">
+    <a class="cat" href="mobile.html">
+      <img src="images/cat-mobile.jpeg" alt="Mobiles" />
+      <h3>Mobiles</h3>
+      <p>Apple • Realme • Samsung • Oneplus • LAVA</p>
+    </a>
+    <a class="cat" href="fashion.html">
+      <img src="images/cat-fashion.jpg" alt="Fashion" />
+      <h3>Fashion</h3>
+      <p>Men • Women • Kids</p>
+    </a>
+    <a class="cat" href="electronics.html">
+      <img src="images/cat-electronics.jpg" alt="Electronics" />
+      <h3>Electronics</h3>
+      <p>Bluetooth • Laptops • Camera</p>
+    </a>
+    <a class="cat" href="home.html">
+      <img src="images/cat-home.jpeg" alt="Home" />
+      <h3>Home</h3>
+      <p>Induction • Dining table • Sofa set • Refrigerator • Wall décor</p>
+    </a>
+  </section>
+
+  <!-- Promo rows -->
+  <section class="row">
+    <h2>Deals for you</h2>
+    <div class="cards">
+      <div class="card"style="padding: 30px;">
+        <img src="images/dl1.jpeg" alt="" />
+        <div class="price"><span class="cut">₹2,499</span> ₹1,199</div>
+      </div>
+      <div class="card"style="padding: 30px;">
+        <img src="images/dl2.jpeg" alt="" />
+        <div class="price"><span class="cut">₹4,999</span> ₹2,499</div>
+      </div>
+      <div class="card"style="padding: 30px;">
+        <img src="images/dl3.jpeg" alt="" />
+        <div class="price"><span class="cut">₹1,299</span> ₹599</div>
+      </div>
+      <div class="card" style="padding: 30px;">
+        <img src="images/dl4.jpg" alt="" />
+        <div class="price"><span class="cut">₹1,299</span> ₹599</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Camera modal (mock) -->
+  <div id="cameraModal" class="modal hidden">
+    <div class="modal__content">
+      <video id="cameraView" autoplay playsinline></video>
+      <div class="modal__actions">
+        <button id="snapBtn">Capture</button>
+        <button class="secondary" id="closeCamera">Close</button>
+      </div>
+      <canvas id="snapshot" class="hidden"></canvas>
+    </div>
+  </div>
+</body>
+</html>

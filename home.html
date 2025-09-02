@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>E-Shop | Mobiles</title>
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="script.js"></script>
+</head>
+<style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #f8f8f8;
+      text-align: center;
+    }
+
+    h1 {
+      color: yellow;
+    }
+
+    .models-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .model {
+      background-color: #fff;
+      padding: 15px;
+      border-radius: 10px;
+      width: 180px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .model img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .model p {
+      margin: 5px 0;
+      font-weight: bold;
+    }
+
+    .price {
+      font-weight: bold;
+      color: red;
+    }
+
+    .original-price {
+      text-decoration: line-through;
+      color: gray;
+      margin-right: 5px;
+    }
+
+    .cart-btn {
+      display: inline-block;
+      margin-top: 5px;
+      padding: 8px 12px;
+      background-color: #0071e3;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+
+    .cart-btn:hover {
+      background-color: #005bb5;
+    }
+    .subbar {
+  display: flex;
+  align-items: center;
+  background: #111;   /* dark background */
+  color: white;
+  padding: 10px 15px;
+}
+
+.subbar h1 {
+  flex: 1;
+  text-align: center;
+  margin: 0;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.back {
+  background: transparent;   /* no default button background */
+  border: none;              /* remove border */
+  color: white;              /* icon color */
+  font-size: 22px;           /* size of arrow */
+  cursor: pointer;           /* pointer cursor */
+  padding: 5px 10px;
+  border-radius: 8px;
+  transition: background 0.2s ease;
+}
+
+.back:hover {
+  background: rgba(255,255,255,0.2); /* hover effect */
+}
+
+.back:active {
+  background: rgba(255,255,255,0.3); /* click effect */
+}
+
+  </style>
+</head>
+<body>
+   <header class="subbar">
+    <button class="back" onclick="history.back()">←</button>
+    <h1>HOME GADGETS</h1>
+  </header>
+<!-- <h1> Home Application</h1> -->
+
+<!-- Lightbox -->
+<div id="lightbox" onclick="hideLightbox()" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.8); justify-content:center; align-items:center;">
+  <div style="background:#fff; padding:20px; border-radius:10px; text-align:center; max-width:400px;">
+    <img id="lightbox-img" style="width:100%; height:auto; border-radius:10px; margin-bottom:10px;">
+    <h2 id="lightbox-name"></h2>
+    <p id="lightbox-price" style="color:red; font-weight:bold;"></p>
+    <button id="lightbox-add-btn" style="padding:8px 12px; background-color:#0071e3; color:white; border:none; border-radius:5px; cursor:pointer;">Add to Cart</button>
+  </div>
+</div>
+
+
+  <div class="models-container">
+    <div class="model">
+      <img src="images/h1.jpg" alt="Apple Model 1"onclick="showLightbox('images/h1.jpg','Butterfly Renz 3 burner gas stove',2800)">
+      <p>Butterfly Renz 3 burner gas stove</p>
+      <p><span class="original-price">M.R.P:₹3,500</span><span class="price">₹2,800</span></p>
+            <button class="cart-btn" onclick="addToCart('Butterfly Renz 3 burner gas stove',2800, 'images/h1.jpg')">Add to Cart</button>
+    </div>
+    <div class="model">
+      <img src="images/h2.jpg" alt="Apple Model 2"onclick="showLightbox('images/h2.jpg','AUA D purified water',10800)">
+      <p>AUA D purified water</p>
+      <p><span class="original-price">M.R.P:11,300</span><span class="price">₹10,800</span></p>
+           <button class="cart-btn" onclick="addToCart('AUA D purified water',10800, 'images/h2.jpg')">Add to Cart</button>
+    </div>
+    <div class="model">
+      <img src="images/h3.jpg" alt="Apple Model 3"onclick="showLightbox('images/h3.jpg','Eureka vacuum cleaner ',13300)">
+      <p>Eureka vacuum cleaner </p>
+      <p><span class="original-price">M.R.P:₹15,800</span><span class="price">₹13,300</span></p>
+        <button class="cart-btn" onclick="addToCart('Eureka vacuum cleaner ',13300, 'images/h3.jpg')">Add to Cart</button>
+    </div>
+    <div class="model">
+      <img src="images/h4.jpg" alt="Apple Model 4"onclick="showLightbox('images/h4.jpg','Philips HL7756/01 750 Watt mixer grinder',10800)">
+      <p>Philips HL7756/01 750 Watt mixer grinder</p>
+      <p><span class="original-price">M.R.P:₹12,500</span><span class="price">₹10,800</span></p>
+      <button class="cart-btn" onclick="addToCart('Philips HL7756/01 750 Watt mixer grinder',10800, 'images/h4.jpg')">Add to Cart</button>
+    </div>
+    <div class="model">
+      <img src="images/h5.jpg" alt="Apple Model 5"onclick="showLightbox('images/h5.jpg','Pigeon 1800 Watt Induction ',1499)">
+      <p>Pigeon 1800 Watt Induction </p>
+      <p><span class="original-price">M.R.P:₹1,999</span><span class="price">₹1,499</span></p>
+            <button class="cart-btn" onclick="addToCart('Pigeon 1800 Watt Induction ',1499, 'images/h5.jpg')">Add to Cart</button>
+    </div>
+    <div class="model"> 
+      <img src="images/h6.jpg" alt="Apple Model 6"onclick="showLightbox('images/h6.jpg','wood dinning table 4 seater',16999)">
+      <p>wood dinning table 4 seater</p>
+      <p><span class="original-price">M.R.P:₹18,999</span><span class="price">₹16,999</span></p>
+      <button class="cart-btn" onclick="addToCart('wood dinning table 4 seater',16999, 'images/h6.jpg')">Add to Cart</button>
+    </div>
+    <div class="model">
+      <img src="images/h7.jpg" alt="Apple Model 7"onclick="showLightbox('images/h7.jpg','jute curtains fot 7 feet door',550)">
+      <p>jute curtains fot 7 feet door</p>
+      <p><span class="original-price">M.R.P:₹750</span><span class="price">₹550</span></p>
+            <button class="cart-btn" onclick="addToCart('jute curtains fot 7 feet door',550, 'images/h7.jpg')">Add to Cart</button>
+    </div>
+    <div class="model">
+      <img src="images/h8.jpg" alt="Apple Model 8"onclick="showLightbox('images/h8.jpg','wood double bed with storage box',39499)">
+      <p>wood double bed with storage box </p>
+      <p><span class="original-price">M.R.P:₹42,599</span><span class="price">₹39,499</span></p>
+           <button class="cart-btn" onclick="addToCart('wood double bed with storage box',39499, 'images/h8.jpg')">Add to Cart</button>
+    </div>
+    <div class="model">
+      <img src="images/h9.jpg" alt="Apple Model 8"onclick="showLightbox('images/h9.jpg','lying panda night light',440)">
+      <p>lying panda night light</p>
+      <p><span class="original-price">M.R.P:690</span><span class="price">₹440</span></p>
+            <button class="cart-btn" onclick="addToCart('lying panda night light',440, 'images/h9.jpg')">Add to Cart</button>
+    </div>
+    <div class="model">
+      <img src="images/h10.jpg" alt="Apple Model 8"onclick="showLightbox('images/h10.jpg','3 seater sofa',19299)">
+      <p>3 seater sofa</p>
+      <p><span class="original-price">M.R.P:₹21,399</span><span class="price">₹19,299</span></p>
+           <button class="cart-btn" onclick="addToCart('3 seater sofa',19299, 'images/h10.jpg')">Add to Cart</button>
+    </div>
+    <div class="model">
+      <img src="images/h11.jpg" alt="Apple Model 8"onclick="showLightbox('images/h11.jpg','12 seater sofa for living room',37900)">
+      <p>12 seater sofa for living room</p>
+      <p><span class="original-price">M.R.P:₹43,800</span><span class="price">₹37,900</span></p>
+          <button class="cart-btn" onclick="addToCart('12 seater sofa for living room',37900, 'images/h11.jpg')">Add to Cart</button>
+    </div>
+    <div class="model">
+      <img src="images/h12.jpg" alt="Apple Model 8"onclick="showLightbox('images/h12.jpg','whirlpool 8kg MAGIC Pro washing machine',19999)">
+      <p>whirlpool 8kg MAGIC Pro washing machine</p>
+      <p><span class="original-price">M.R.P:23,600</span><span class="price">19,999</span></p>
+           <button class="cart-btn" onclick="addToCart('whirlpool 8kg MAGIC Pro washing machine',19999, 'images/h12.jpg')">Add to Cart</button>
+    </div>
+    <div class="model">
+      <img src="images/h13.jpg" alt="Apple Model 8"onclick="showLightbox('images/h13.jpg','Haier 190L single door Refrigerator',17899)">
+      <p>Haier 190L single door Refrigerator</p>
+      <p><span class="original-price">M.R.P:₹22,799</span><span class="price">₹17,899</span></p>
+           <button class="cart-btn" onclick="addToCart('Haier 190L single door Refrigerator',17899, 'images/h13.jpg')">Add to Cart</button>
+    </div>
+    <div class="model">
+      <img src="images/h14.jpg" alt="Apple Model 8"onclick="showLightbox('images/h14.jpg','Panasonic 32 inch smart LED TV',15990)">
+      <p>Panasonic 32 inch smart LED TV</p>
+      <p><span class="original-price">M.R.P:₹1890</span><span class="price">₹15,990</span></p>
+           <button class="cart-btn" onclick="addToCart('Panasonic 32 inch smart LED TV',15990, 'images/eh14.jpg')">Add to Cart</button>
+    </div>
+    <!-- <div class="model">
+      <img src="images/h15.jpg" alt="Apple Model 8"onclick="showLightbox('images/h15.jpg','Xiaomi 43inch smart LED TV',24470)">
+      <p>Xiaomi 43inch smart LED TV</p>
+      <p><span class="original-price">M.R.P:₹27,399</span><span class="price">₹24,470</span></p>
+            <button class="cart-btn" onclick="addToCart('Xiaomi 43inch smart LED TV',24470, 'images/h15.jpg')">Add to Cart</button>
+    </div>
+    <div class="model">
+      <img src="images/h16.jpg" alt="Apple Model 8"onclick="showLightbox('images/h16.jpg','Daikin 0.8ton split AC',26390)">
+      <p>Daikin 0.8ton split AC</p>
+      <p><span class="original-price">M.R.P:₹29,780</span><span class="price">₹26,390</span></p>
+           <button class="cart-btn" onclick="addToCart('Daikin 0.8ton split AC',26390, 'images/h16.jpg')">Add to Cart</button>
+    </div>
+    <div class="model">
+      <img src="images/h17.jpg" alt="Apple Model 8"onclick="showLightbox('images/h17.jpg','WZATCO pro full automatic projector',34910)">
+      <p>WZATCO pro full automatic projector</p>
+      <p><span class="original-price">M.R.P:₹38,350</span><span class="price">₹34,910</span></p>
+           <button class="cart-btn" onclick="addToCart('WZATCO pro full automatic projector',34910, 'images/h17.jpg')">Add to Cart</button>
+    </div>
+    <div class="model">
+      <img src="images/h18.jpg" alt="Apple Model 8"onclick="showLightbox('images/h18.jpg','Havells 1200Mm ceiling fan',5520)">
+      <p>Havells 1200Mm ceiling fan</p>
+      <p><span class="original-price">M.R.P:₹7,880</span><span class="price">₹5,520</span></p>
+            <button class="cart-btn" onclick="addToCart('Havells 1200Mm ceiling fan',5520, 'images/h18.jpg')">Add to Cart</button>
+    </div> -->
+  </div> 
+    <!-- <nav class="bottom-nav" style="background-color: #020000;">
+    <a href="index.html" style="color: whitesmoke;font-weight: bold;">🏠 Home</a>
+    <a href="cart.html" id="cartBtn" style="color: whitesmoke;font-weight: bold;">🛒 Cart</a>
+    <a href="menu.html" id="menuBtn" style="color: whitesmoke;font-weight: bold;">☰ Menu</a>
+  </nav> -->
+  
+  <script>function showLightbox(imgSrc, name, price){
+  document.getElementById('lightbox-img').src = imgSrc;
+  document.getElementById('lightbox-name').innerText = name;
+  document.getElementById('lightbox-price').innerText = `₹${price}`;
+  
+  // Add to cart button
+  const addBtn = document.getElementById('lightbox-add-btn');
+  addBtn.onclick = function(e){
+    e.stopPropagation(); // prevent closing the lightbox
+    addToCart(name, price, imgSrc);
+  }
+
+  document.getElementById('lightbox').style.display = 'flex';
+}
+
+function hideLightbox(){
+  document.getElementById('lightbox').style.display = 'none';
+}
+</script>
+</body>
+</html>

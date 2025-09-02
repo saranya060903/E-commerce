@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Side Drawer Menu</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    /* Hidden checkbox */
+    #menu-toggle {
+      display: none;
+    }
+
+    /* Menu button */
+    .menu-btn {
+      background: #333;
+      color: white;
+      padding: 10px 15px;
+      cursor: pointer;
+      font-size: 18px;
+      border: none;
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      z-index: 1001;
+      border-radius: 5px;
+    }
+
+    /* Overlay background */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      overflow-x: hidden;
+      transition: 0.4s;
+      z-index: 1000;
+    }
+
+    /* Side drawer */
+    .drawer {
+      position: absolute;
+      top: 0;
+      left: -250px;
+      width: 250px;
+      height: 100%;
+      background: #fff;
+      box-shadow: 2px 0 5px rgba(0,0,0,0.5);
+      transition: 0.4s;
+      padding-top: 60px;
+    }
+
+    .drawer ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .drawer li {
+      padding: 15px 20px;
+      border-bottom: 1px solid #ddd;
+      cursor: pointer;
+    }
+
+    .drawer li:hover {
+      background: #f4f4f4;
+    }
+
+    /* When checked show overlay & drawer */
+    #menu-toggle:checked ~ .overlay {
+      width: 100%;
+    }
+
+    #menu-toggle:checked ~ .overlay .drawer {
+      left: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hidden checkbox -->
+  <input type="checkbox" id="menu-toggle">
+
+  <!-- Menu button -->
+  <label for="menu-toggle" class="menu-btn">☰ Menu</label>
+
+  <!-- Overlay & Drawer -->
+  <div class="overlay">
+    <div class="drawer">
+      <ul>
+        <li>Fashion</li>
+        <li>Electronics</li>
+        <li>Mobile</li>
+        <li>Home</li>
+      </ul>
+    </div>
+  </div>
+
+</body>
+</html>

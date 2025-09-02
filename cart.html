@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cart | E-Shop</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  body { font-family: Arial, sans-serif; margin: 20px; background-color: #f8f8f8; }
+  h1 { text-align: center; color: #333; }
+  .cart-container { width: 90%; margin: auto; }
+  table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+  th, td { padding: 10px; text-align: center; border-bottom: 1px solid #ccc; }
+  img { width: 80px; cursor: pointer; border-radius: 5px; }
+  button { padding: 5px 10px; cursor: pointer; border: none; border-radius: 5px; background-color: #0071e3; color: white; }
+  button:hover { background-color: #005bb5; }
+  .quantity-btn { background-color: #555; margin: 0 5px; }
+  .total { text-align: right; font-size: 18px; margin-top: 15px; font-weight: bold; }
+  .empty-cart { text-align: center; font-size: 20px; margin-top: 50px; }
+
+  /* ----------------- */
+  /* 🔝 Topbar         */
+  /* ----------------- */
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;
+    background: #222;
+    color: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  .topbar .brand {
+    font-size: 1.4rem;
+    font-weight: bold;
+  }
+  .top-nav a {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 20px;
+    font-size: 1rem;
+    transition: color 0.2s ease;
+  }
+  .top-nav a:hover {
+    color: #f4c542;
+  }
+  .top-nav .active {
+    color: #f4c542;
+    font-weight: bold;
+  }
+
+  /* ----------------- */
+  /* 📱 Mobile View    */
+  /* ----------------- */
+  @media (max-width: 600px) {
+    table, thead, tbody, th, td, tr {
+      display: block;
+    }
+    thead {
+      display: none; /* Hide header */
+    }
+    tr {
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      background: #fff;
+      padding: 10px;
+    }
+    td {
+      text-align: left;
+      padding: 8px;
+      border: none;
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+    }
+    td img {
+      width: 60px;
+      height: auto;
+    }
+    td::before {
+      content: attr(data-label);
+      font-weight: bold;
+      color: #333;
+    }
+    .total {
+      text-align: center;
+      font-size: 16px;
+    }
+    .topbar {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .top-nav {
+      margin-top: 8px;
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .top-nav a {
+      margin: 5px 10px 0 0;
+    }
+  }
+</style>
+</head>
+<body>
+  <!-- Top Bar -->
+  <header class="topbar">
+    <div class="brand">E-Shop</div>
+    <nav class="top-nav">
+      <a class="active" href="index.html">🏠 Home</a>
+      <a href="cart.html" id="cartBtn">🛒 Cart</a>
+      <!-- Dropdown Menu -->
+      <div class="dropdown">
+        <div class="dropdown-btn" onclick="toggleMenu()">☰ Menu</div>
+        <ul class="dropdown-content" id="menuList">
+          <li><a href="fashion.html">Fashion</a></li>
+          <li><a href="electronics.html">Electronics</a></li>
+          <li><a href="mobile.html">Mobile</a></li>
+          <li><a href="home.html">Home</a></li>
+        </ul>
+      </div>
+    </nav>
+    </nav>
+  </header>
+
+<h1>My Cart</h1>
+<div class="cart-container">
+  <table id="cartTable">
+    <thead>
+      <tr>
+        <th>Image</th>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Total</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="cartBody">
+      <!-- Products will be rendered here -->
+    </tbody>
+  </table>
+  <div class="total" id="grandTotal">Grand Total: ₹0</div>
+</div>
+
+<script>
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+function renderCart() {
+  const cartBody = document.getElementById('cartBody');
+  cartBody.innerHTML = '';
+  if(cart.length === 0){
+    cartBody.innerHTML = '<tr><td colspan="6" class="empty-cart">Your cart is empty</td></tr>';
+    document.getElementById('grandTotal').innerText = 'Grand Total: ₹0';
+    return;
+  }
+
+  let grandTotal = 0;
+
+  cart.forEach((item, index) => {
+    let total = item.price * (item.qty || 1);
+    grandTotal += total;
+
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td data-label="Image"><img src="${item.img}" onclick="viewProduct(${index})" alt="${item.name}"></td>
+      <td data-label="Product">${item.name}</td>
+      <td data-label="Price">₹${item.price}</td>
+      <td data-label="Quantity">
+        <button class="quantity-btn" onclick="decrementQty(${index})">-</button>
+        ${item.qty || 1}
+        <button class="quantity-btn" onclick="incrementQty(${index})">+</button>
+      </td>
+      <td data-label="Total">₹${total}</td>
+      <td data-label="Action"><button onclick="removeItem(${index})">Remove</button></td>
+    `;
+    cartBody.appendChild(tr);
+  });
+
+  document.getElementById('grandTotal').innerText = `Grand Total: ₹${grandTotal}`;
+}
+
+function incrementQty(index){
+  cart[index].qty = (cart[index].qty || 1) + 1;
+  localStorage.setItem('cart', JSON.stringify(cart));
+  renderCart();
+}
+
+function decrementQty(index){
+  cart[index].qty = (cart[index].qty || 1) - 1;
+  if(cart[index].qty < 1) cart[index].qty = 1;
+  localStorage.setItem('cart', JSON.stringify(cart));
+  renderCart();
+}
+
+function removeItem(index){
+  cart.splice(index,1);
+  localStorage.setItem('cart', JSON.stringify(cart));
+  renderCart();
+}
+
+function viewProduct(index){
+  // Save selected product in localStorage and redirect to a product page
+  localStorage.setItem('selectedProduct', JSON.stringify(cart[index]));
+  window.location.href = 'product.html';
+}
+
+renderCart();
+
+
+
+function toggleMenu() {
+      document.querySelector('.dropdown').classList.toggle('show');
+    }
+
+    // Close dropdown if clicked outside
+    window.addEventListener('click', function(e) {
+      if (!e.target.matches('.dropdown-btn')) {
+        document.querySelectorAll('.dropdown').forEach(drop => {
+          drop.classList.remove('show');
+        });
+      }
+    });
+</script>
+</body>
+</html>
